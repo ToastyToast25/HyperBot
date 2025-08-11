@@ -1,0 +1,240 @@
+HyperTicky/
+├── README.md
+├── LICENSE
+├── .gitignore
+├── requirements.txt
+├── install.bat
+├── docker-compose.yml
+├── Dockerfile
+│
+├── config/
+│   ├── config.json5.example
+│   ├── hosted_config.json5
+│   ├── self_hosted_config.json5
+│   └── business_model.py
+│
+├── main.py                          # Bot entry point
+├── config.py                        # Configuration manager
+├── database.py                      # Database abstraction layer
+│
+├── cogs/                           # Modular bot features
+│   ├── __init__.py
+│   ├── tickets.py                  # Core ticket management
+│   ├── reports.py                  # User reporting system
+│   ├── applications.py             # Staff applications
+│   ├── suggestions.py              # Community suggestions
+│   ├── statistics.py               # Analytics and metrics
+│   ├── priorities.py               # Priority management
+│   ├── subscription_manager.py     # Hosted service subscriptions
+│   ├── license_manager.py          # Self-hosted license validation
+│   ├── ai_assistant.py             # AI-powered features
+│   └── billing_integration.py      # Stripe/payment processing
+│
+├── models/                         # Database models
+│   ├── __init__.py
+│   ├── ticket.py
+│   ├── user.py
+│   ├── guild.py
+│   ├── subscription.py
+│   └── license.py
+│
+├── utils/                          # Utility functions
+│   ├── __init__.py
+│   ├── embedder.py                 # Discord embed helpers
+│   ├── validators.py               # Input validation
+│   ├── permissions.py              # Permission checking
+│   ├── rate_limiter.py             # Rate limiting utilities
+│   └── encryption.py               # Encryption/security utils
+│
+├── views/                          # Discord UI components
+│   ├── __init__.py
+│   ├── ticket_views.py             # Ticket buttons/modals
+│   ├── subscription_views.py       # Upgrade/billing views
+│   ├── application_views.py        # Staff application forms
+│   └── suggestion_views.py         # Suggestion voting
+│
+├── api/                            # REST API (Enterprise feature)
+│   ├── __init__.py
+│   ├── routes/
+│   │   ├── tickets.py
+│   │   ├── analytics.py
+│   │   └── webhooks.py
+│   └── middleware/
+│       ├── auth.py
+│       └── rate_limit.py
+│
+├── scripts/                        # Deployment/maintenance scripts
+│   ├── migrate_database.py
+│   ├── backup_data.py
+│   ├── generate_license.py
+│   └── cleanup_old_tickets.py
+│
+├── templates/                      # Message templates
+│   ├── embeds/
+│   │   ├── ticket_created.json
+│   │   ├── application_received.json
+│   │   └── subscription_expired.json
+│   └── emails/
+│       ├── welcome.html
+│       ├── license_expired.html
+│       └── payment_failed.html
+│
+├── data/                           # Data storage (for SQLite)
+│   ├── hyperticky.db               # SQLite database (self-hosted)
+│   ├── license_cache.json          # License validation cache
+│   └── backups/                    # Local backups
+│
+├── logs/                           # Log files
+│   ├── hyperticky.log
+│   ├── error.log
+│   └── audit.log
+│
+├── tests/                          # Test suite
+│   ├── __init__.py
+│   ├── test_tickets.py
+│   ├── test_subscriptions.py
+│   ├── test_license_validation.py
+│   └── test_database.py
+│
+├── docs/                           # Documentation
+│   ├── setup/
+│   │   ├── hosted_setup.md
+│   │   ├── self_hosted_setup.md
+│   │   └── discord_setup.md
+│   ├── api/
+│   │   ├── endpoints.md
+│   │   └── authentication.md
+│   ├── user_guide/
+│   │   ├── creating_tickets.md
+│   │   ├── staff_management.md
+│   │   └── customization.md
+│   └── admin/
+│       ├── configuration.md
+│       ├── troubleshooting.md
+│       └── database_management.md
+│
+├── license_server/                 # Separate license validation service
+│   ├── main.py                     # FastAPI license server
+│   ├── models/
+│   │   ├── customer.py
+│   │   ├── subscription.py
+│   │   └── license.py
+│   ├── routes/
+│   │   ├── validation.py
+│   │   ├── webhooks.py
+│   │   └── admin.py
+│   ├── database/
+│   │   ├── schema.sql
+│   │   └── migrations/
+│   ├── docker-compose.yml
+│   ├── Dockerfile
+│   └── requirements.txt
+│
+├── deployment/                     # Deployment configurations
+│   ├── hosted/
+│   │   ├── docker-compose.yml
+│   │   ├── nginx.conf
+│   │   ├── cloudformation.yml      # AWS deployment
+│   │   └── kubernetes/             # K8s manifests
+│   │       ├── deployment.yml
+│   │       ├── service.yml
+│   │       └── ingress.yml
+│   ├── self_hosted/
+│   │   ├── docker-compose.yml
+│   │   ├── setup.sh
+│   │   └── systemd/
+│   │       └── hyperticky.service
+│   └── license_server/
+│       ├── docker-compose.yml
+│       ├── nginx.conf
+│       └── ssl/
+│
+├── monitoring/                     # Monitoring and observability
+│   ├── prometheus/
+│   │   └── config.yml
+│   ├── grafana/
+│   │   ├── dashboards/
+│   │   └── provisioning/
+│   └── alerts/
+│       └── rules.yml
+│
+└── tools/                          # Development tools
+    ├── database_seeder.py          # Sample data for testing
+    ├── license_generator.py        # Generate test licenses
+    ├── performance_test.py         # Load testing
+    └── migration_tool.py           # Data migration utilities
+
+# Additional Files by Business Model:
+
+## Hosted Service Only:
+├── cogs/multi_tenant.py            # Multi-tenancy management
+├── middleware/tenant_isolation.py  # Database isolation
+├── billing/stripe_integration.py   # Subscription management
+└── analytics/revenue_tracking.py   # Business metrics
+
+## Self-Hosted Only:
+├── installer/
+│   ├── install.py                  # Automated installer
+│   ├── requirements_check.py       # System requirements
+│   └── config_wizard.py            # Configuration wizard
+├── updater/
+│   ├── auto_updater.py             # Self-updating mechanism
+│   └── version_check.py            # Version management
+└── support/
+    ├── diagnostics.py              # System diagnostics
+    ├── log_collector.py            # Support log collection
+    └── remote_access.py            # Support remote access
+
+# Configuration Files:
+├── .env.example                    # Environment variables template
+├── .dockerignore
+├── pyproject.toml                  # Python project config
+├── setup.py                        # Package installation
+└── VERSION                         # Version tracking
+
+# CI/CD:
+├── .github/
+│   ├── workflows/
+│   │   ├── test.yml                # Automated testing
+│   │   ├── build.yml               # Docker builds
+│   │   ├── deploy.yml              # Deployment pipeline
+│   │   └── security.yml            # Security scanning
+│   ├── ISSUE_TEMPLATE/
+│   └── PULL_REQUEST_TEMPLATE.md
+├── .gitlab-ci.yml                  # GitLab CI (alternative)
+└── Jenkinsfile                     # Jenkins pipeline (enterprise)
+
+# Documentation Website (for marketing):
+├── website/
+│   ├── public/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   └── styles/
+│   ├── package.json
+│   └── next.config.js
+
+# Customer Portal (self-hosted customers):
+├── customer_portal/
+│   ├── dashboard/
+│   ├── billing/
+│   ├── support/
+│   └── api/
+
+# Database Schemas:
+├── database/
+│   ├── hosted/
+│   │   ├── schema.sql              # Multi-tenant schema
+│   │   ├── migrations/
+│   │   └── seeds/
+│   ├── self_hosted/
+│   │   ├── schema.sql              # Single-tenant schema
+│   │   ├── migrations/
+│   │   └── seeds/
+│   └── license_server/
+│       ├── schema.sql              # License management schema
+│       └── migrations/
+
+Total Files: ~150-200 files
+Total Directories: ~50-60 directories
+Estimated LOC: 15,000-25,000 lines of code

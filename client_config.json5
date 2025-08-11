@@ -1,0 +1,57 @@
+// config/client_config.json5 - CLIENT-SAFE Configuration
+// This is what customers see - NO sensitive business information
+{
+  "business_model": "self_hosted",
+  "bot_token": "YOUR_BOT_TOKEN_HERE",
+  "guild_id": "YOUR_GUILD_ID_HERE",
+  
+  // Simple license key - customers only get this
+  "license_key": "YOUR_LICENSE_KEY_HERE",
+  
+  // Local database only
+  "database": {
+    "use_mariadb": false,
+    "sqlite_path": "data/hyperticky.db"
+  },
+  
+  // Discord Configuration - what they need to set up
+  "roles": {
+    "admin": "YOUR_ADMIN_ROLE_ID",
+    "moderator": "YOUR_MODERATOR_ROLE_ID",
+    "support": "YOUR_SUPPORT_ROLE_ID"
+  },
+  
+  "channels": {
+    "tickets": "YOUR_TICKETS_CHANNEL_ID",
+    "reports": "YOUR_REPORTS_CHANNEL_ID", 
+    "applications": "YOUR_APPLICATIONS_CHANNEL_ID",
+    "suggestions": "YOUR_SUGGESTIONS_CHANNEL_ID",
+    "logs": "YOUR_LOGS_CHANNEL_ID"
+  },
+  
+  "categories": {
+    "tickets": "YOUR_TICKETS_CATEGORY_ID",
+    "reports": "YOUR_REPORTS_CATEGORY_ID",
+    "applications": "YOUR_APPLICATIONS_CATEGORY_ID"
+  },
+  
+  // Bot Settings
+  "prefix": ["!ht.", "!hyperticky."],
+  
+  // Feature toggles (what they can customize)
+  "features": {
+    "auto_cleanup_closed_tickets": true,
+    "ticket_transcripts": true,
+    "statistics_auto_update": true,
+    "email_notifications": false
+  },
+  
+  // Basic security settings they can adjust
+  "security": {
+    "max_tickets_per_user_per_day": 5,
+    "ticket_cooldown_minutes": 10
+  },
+  
+  // License cache duration (they can adjust this)
+  "license_cache_duration": 3600
+}

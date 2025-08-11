@@ -1,0 +1,49 @@
+// ===================================================================
+
+// Quick Start Guide for Clients - config.json5
+{
+  // STEP 1: Set this to "self_hosted" (customers can't run hosted)
+  "business_model": "self_hosted",
+  
+  // STEP 2: Get your Discord bot token from https://discord.com/developers
+  "bot_token": "YOUR_BOT_TOKEN_HERE",
+  
+  // STEP 3: Get your Discord server ID (Enable Developer Mode → Right Click Server → Copy ID)
+  "guild_id": "YOUR_GUILD_ID_HERE", 
+  
+  // STEP 4: Your license key (provided after purchase)
+  "license_key": "trial", // Replace with your purchased license key
+  
+  // STEP 5: Database (SQLite is automatic - no setup needed)
+  "database": {
+    "use_mariadb": false,
+    "sqlite_path": "data/hyperticky.db"
+  },
+  
+  // STEP 6: Set up your Discord roles (Right click role → Copy ID)
+  "roles": {
+    "admin": "123456789012345678",       // Replace with your admin role ID
+    "moderator": "123456789012345678",   // Replace with your moderator role ID  
+    "support": "123456789012345678"      // Replace with your support role ID
+  },
+  
+  // STEP 7: Set up your Discord channels (Right click channel → Copy ID)
+  "channels": {
+    "tickets": "123456789012345678",     // Channel where ticket panel will be posted
+    "logs": "123456789012345678"         // Channel for audit logs
+  },
+  
+  // STEP 8: Set up your Discord categories (Right click category → Copy ID)
+  "categories": {
+    "tickets": "123456789012345678"      // Category where ticket channels will be created
+  },
+  
+  // STEP 9: Customize bot behavior (optional)
+  "prefix": ["!ht.", "!"],
+  
+  "features": {
+    "auto_cleanup_closed_tickets": true,
+    "ticket_transcripts": true,
+    "statistics_auto_update": true
+  }
+}

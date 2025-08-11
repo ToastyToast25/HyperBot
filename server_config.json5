@@ -1,0 +1,134 @@
+// server_config.json5 - YOUR PRIVATE SERVER CONFIGURATION
+// This file contains your business secrets - NEVER give to clients
+{
+  "business_model": "hosted",
+  
+  // YOUR payment processing (clients never see this)
+  "stripe": {
+    "secret_key": "sk_live_your_real_stripe_key",
+    "webhook_secret": "whsec_your_webhook_secret",
+    "success_url": "https://yourdomain.com/success",
+    "cancel_url": "https://yourdomain.com/cancel",
+    "product_ids": {
+      "basic": "price_basic_monthly",
+      "pro": "price_pro_monthly", 
+      "enterprise": "price_enterprise_monthly"
+    }
+  },
+  
+  // YOUR database (clients never see this)
+  "database": {
+    "use_mariadb": true,
+    "host": "your-db-server.com",
+    "port": 3306,
+    "user": "your_db_user",
+    "password": "your_secure_password",
+    "database": "hyperticky_production",
+    "ssl": true,
+    "pool_size": 20
+  },
+  
+  // YOUR license server (clients never see this)
+  "license_server": {
+    "url": "https://license.yourdomain.com",
+    "api_key": "your_license_api_key",
+    "encryption_key": "your_encryption_key",
+    "timeout": 30
+  },
+  
+  // YOUR subscription tiers and pricing
+  "subscription_tiers": {
+    "trial": {
+      "price": 0,
+      "duration_days": 7,
+      "features": {
+        "max_tickets": 25,
+        "max_staff_positions": 2,
+        "api_access": false,
+        "priority_support": false
+      }
+    },
+    "basic": {
+      "price": 9.99,
+      "stripe_price_id": "price_basic_monthly",
+      "features": {
+        "max_tickets": 200,
+        "max_staff_positions": 5,
+        "api_access": false,
+        "priority_support": false
+      }
+    },
+    "pro": {
+      "price": 29.99,
+      "stripe_price_id": "price_pro_monthly", 
+      "features": {
+        "max_tickets": 1000,
+        "max_staff_positions": 15,
+        "api_access": true,
+        "priority_support": true
+      }
+    },
+    "enterprise": {
+      "price": 99.99,
+      "stripe_price_id": "price_enterprise_monthly",
+      "features": {
+        "max_tickets": -1,
+        "max_staff_positions": -1,
+        "api_access": true,
+        "priority_support": true,
+        "dedicated_support": true
+      }
+    }
+  },
+  
+  // YOUR license tiers for self-hosted customers  
+  "license_tiers": {
+    "pro": {
+      "price": 49.99,
+      "annual_price": 499.99,
+      "features": {
+        "max_tickets": 1000,
+        "max_staff_positions": 15,
+        "api_access": true,
+        "priority_support": true
+      }
+    },
+    "enterprise": {
+      "price": 199.99,
+      "annual_price": 1999.99,
+      "features": {
+        "max_tickets": 5000,
+        "max_staff_positions": 50,
+        "api_access": true,
+        "priority_support": true,
+        "dedicated_support": true
+      }
+    },
+    "unlimited": {
+      "price": 499.99,
+      "annual_price": 4999.99,
+      "features": {
+        "max_tickets": -1,
+        "max_staff_positions": -1,
+        "api_access": true,
+        "priority_support": true,
+        "dedicated_support": true,
+        "source_code_access": true
+      }
+    }
+  },
+  
+  // YOUR analytics and monitoring
+  "analytics": {
+    "google_analytics_id": "GA-XXXXXXXXX",
+    "mixpanel_token": "your_mixpanel_token",
+    "sentry_dsn": "your_sentry_dsn"
+  },
+  
+  // YOUR webhook endpoints
+  "webhooks": {
+    "stripe_endpoint": "/webhooks/stripe",
+    "license_validation": "/webhooks/license",
+    "usage_reporting": "/webhooks/usage"
+  }
+}

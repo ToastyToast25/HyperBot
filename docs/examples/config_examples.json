@@ -1,0 +1,275 @@
+// config/client_config.json5 - CLIENT-SAFE Configuration
+// This is what customers see - NO sensitive business information
+{
+  "business_model": "self_hosted",
+  "bot_token": "YOUR_BOT_TOKEN_HERE",
+  "guild_id": "YOUR_GUILD_ID_HERE",
+  
+  // Simple license key - customers only get this
+  "license_key": "YOUR_LICENSE_KEY_HERE",
+  
+  // Local database only
+  "database": {
+    "use_mariadb": false,
+    "sqlite_path": "data/hyperticky.db"
+  },
+  
+  // Discord Configuration - what they need to set up
+  "roles": {
+    "admin": "YOUR_ADMIN_ROLE_ID",
+    "moderator": "YOUR_MODERATOR_ROLE_ID",
+    "support": "YOUR_SUPPORT_ROLE_ID"
+  },
+  
+  "channels": {
+    "tickets": "YOUR_TICKETS_CHANNEL_ID",
+    "reports": "YOUR_REPORTS_CHANNEL_ID", 
+    "applications": "YOUR_APPLICATIONS_CHANNEL_ID",
+    "suggestions": "YOUR_SUGGESTIONS_CHANNEL_ID",
+    "logs": "YOUR_LOGS_CHANNEL_ID"
+  },
+  
+  "categories": {
+    "tickets": "YOUR_TICKETS_CATEGORY_ID",
+    "reports": "YOUR_REPORTS_CATEGORY_ID",
+    "applications": "YOUR_APPLICATIONS_CATEGORY_ID"
+  },
+  
+  // Bot Settings
+  "prefix": ["!ht.", "!hyperticky."],
+  
+  // Feature toggles (what they can customize)
+  "features": {
+    "auto_cleanup_closed_tickets": true,
+    "ticket_transcripts": true,
+    "statistics_auto_update": true,
+    "email_notifications": false
+  },
+  
+  // Basic security settings they can adjust
+  "security": {
+    "max_tickets_per_user_per_day": 5,
+    "ticket_cooldown_minutes": 10
+  },
+  
+  // License cache duration (they can adjust this)
+  "license_cache_duration": 3600
+}
+
+// ===================================================================
+
+// server_config.json5 - YOUR PRIVATE SERVER CONFIGURATION
+// This file contains your business secrets - NEVER give to clients
+{
+  "business_model": "hosted",
+  
+  // YOUR payment processing (clients never see this)
+  "stripe": {
+    "secret_key": "sk_live_your_real_stripe_key",
+    "webhook_secret": "whsec_your_webhook_secret",
+    "success_url": "https://yourdomain.com/success",
+    "cancel_url": "https://yourdomain.com/cancel",
+    "product_ids": {
+      "basic": "price_basic_monthly",
+      "pro": "price_pro_monthly", 
+      "enterprise": "price_enterprise_monthly"
+    }
+  },
+  
+  // YOUR database (clients never see this)
+  "database": {
+    "use_mariadb": true,
+    "host": "your-db-server.com",
+    "port": 3306,
+    "user": "your_db_user",
+    "password": "your_secure_password",
+    "database": "hyperticky_production",
+    "ssl": true,
+    "pool_size": 20
+  },
+  
+  // YOUR license server (clients never see this)
+  "license_server": {
+    "url": "https://license.yourdomain.com",
+    "api_key": "your_license_api_key",
+    "encryption_key": "your_encryption_key",
+    "timeout": 30
+  },
+  
+  // YOUR subscription tiers and pricing
+  "subscription_tiers": {
+    "trial": {
+      "price": 0,
+      "duration_days": 7,
+      "features": {
+        "max_tickets": 25,
+        "max_staff_positions": 2,
+        "api_access": false,
+        "priority_support": false
+      }
+    },
+    "basic": {
+      "price": 9.99,
+      "stripe_price_id": "price_basic_monthly",
+      "features": {
+        "max_tickets": 200,
+        "max_staff_positions": 5,
+        "api_access": false,
+        "priority_support": false
+      }
+    },
+    "pro": {
+      "price": 29.99,
+      "stripe_price_id": "price_pro_monthly", 
+      "features": {
+        "max_tickets": 1000,
+        "max_staff_positions": 15,
+        "api_access": true,
+        "priority_support": true
+      }
+    },
+    "enterprise": {
+      "price": 99.99,
+      "stripe_price_id": "price_enterprise_monthly",
+      "features": {
+        "max_tickets": -1,
+        "max_staff_positions": -1,
+        "api_access": true,
+        "priority_support": true,
+        "dedicated_support": true
+      }
+    }
+  },
+  
+  // YOUR license tiers for self-hosted customers  
+  "license_tiers": {
+    "pro": {
+      "price": 49.99,
+      "annual_price": 499.99,
+      "features": {
+        "max_tickets": 1000,
+        "max_staff_positions": 15,
+        "api_access": true,
+        "priority_support": true
+      }
+    },
+    "enterprise": {
+      "price": 199.99,
+      "annual_price": 1999.99,
+      "features": {
+        "max_tickets": 5000,
+        "max_staff_positions": 50,
+        "api_access": true,
+        "priority_support": true,
+        "dedicated_support": true
+      }
+    },
+    "unlimited": {
+      "price": 499.99,
+      "annual_price": 4999.99,
+      "features": {
+        "max_tickets": -1,
+        "max_staff_positions": -1,
+        "api_access": true,
+        "priority_support": true,
+        "dedicated_support": true,
+        "source_code_access": true
+      }
+    }
+  },
+  
+  // YOUR analytics and monitoring
+  "analytics": {
+    "google_analytics_id": "GA-XXXXXXXXX",
+    "mixpanel_token": "your_mixpanel_token",
+    "sentry_dsn": "your_sentry_dsn"
+  },
+  
+  // YOUR webhook endpoints
+  "webhooks": {
+    "stripe_endpoint": "/webhooks/stripe",
+    "license_validation": "/webhooks/license",
+    "usage_reporting": "/webhooks/usage"
+  }
+}
+
+// ===================================================================
+
+// .env.example - Environment Variables Template (for clients)
+// Clients get this - no sensitive info
+BOT_TOKEN=your_discord_bot_token_here
+GUILD_ID=your_discord_server_id_here
+LICENSE_KEY=your_license_key_here
+
+# Optional: Custom database path
+# DATABASE_PATH=data/hyperticky.db
+
+# Optional: Enable debug mode
+# DEBUG=true
+
+// ===================================================================
+
+// .env.server.example - YOUR Server Environment (NEVER give to clients)
+# Production server environment variables - KEEP SECRET
+BOT_TOKEN=your_bot_token
+STRIPE_SECRET_KEY=sk_live_your_stripe_key
+STRIPE_WEBHOOK_SECRET=whsec_your_webhook_secret
+DATABASE_HOST=your-db-host.com
+DATABASE_USER=your_db_user
+DATABASE_PASSWORD=your_secure_password
+DATABASE_NAME=hyperticky_production
+LICENSE_SERVER_URL=https://license.yourdomain.com
+LICENSE_API_KEY=your_license_server_api_key
+ENCRYPTION_KEY=your_32_character_encryption_key
+SENTRY_DSN=your_sentry_dsn_for_error_tracking
+MIXPANEL_TOKEN=your_analytics_token
+
+// ===================================================================
+
+// Quick Start Guide for Clients - config.json5
+{
+  // STEP 1: Set this to "self_hosted" (customers can't run hosted)
+  "business_model": "self_hosted",
+  
+  // STEP 2: Get your Discord bot token from https://discord.com/developers
+  "bot_token": "YOUR_BOT_TOKEN_HERE",
+  
+  // STEP 3: Get your Discord server ID (Enable Developer Mode → Right Click Server → Copy ID)
+  "guild_id": "YOUR_GUILD_ID_HERE", 
+  
+  // STEP 4: Your license key (provided after purchase)
+  "license_key": "trial", // Replace with your purchased license key
+  
+  // STEP 5: Database (SQLite is automatic - no setup needed)
+  "database": {
+    "use_mariadb": false,
+    "sqlite_path": "data/hyperticky.db"
+  },
+  
+  // STEP 6: Set up your Discord roles (Right click role → Copy ID)
+  "roles": {
+    "admin": "123456789012345678",       // Replace with your admin role ID
+    "moderator": "123456789012345678",   // Replace with your moderator role ID  
+    "support": "123456789012345678"      // Replace with your support role ID
+  },
+  
+  // STEP 7: Set up your Discord channels (Right click channel → Copy ID)
+  "channels": {
+    "tickets": "123456789012345678",     // Channel where ticket panel will be posted
+    "logs": "123456789012345678"         // Channel for audit logs
+  },
+  
+  // STEP 8: Set up your Discord categories (Right click category → Copy ID)
+  "categories": {
+    "tickets": "123456789012345678"      // Category where ticket channels will be created
+  },
+  
+  // STEP 9: Customize bot behavior (optional)
+  "prefix": ["!ht.", "!"],
+  
+  "features": {
+    "auto_cleanup_closed_tickets": true,
+    "ticket_transcripts": true,
+    "statistics_auto_update": true
+  }
+}
